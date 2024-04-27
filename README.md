@@ -6,7 +6,7 @@
 #### ¿Por qué?
 ###### La gestión de reservas puede ser una tarea tediosa y consumir mucho tiempo para las empresas, especialmente cuando están organizando eventos o reuniones que involucran a un gran número de personas. Un sistema de reservas centralizado les permite simplificar este proceso, ahorrándoles tiempo y esfuerzo.
 
-######Para los clientes, encontrar y reservar mesas en restaurantes puede ser una tarea engorrosa, especialmente si desean visitar un restaurante popular o durante períodos de alta demanda. Un servicio de reservas facilita este proceso al permitirles reservar con anticipación y garantizar un lugar en su restaurante preferido.
+###### Para los clientes, encontrar y reservar mesas en restaurantes puede ser una tarea engorrosa, especialmente si desean visitar un restaurante popular o durante períodos de alta demanda. Un servicio de reservas facilita este proceso al permitirles reservar con anticipación y garantizar un lugar en su restaurante preferido.
 ------------
 
 #### ¿Para qué?
