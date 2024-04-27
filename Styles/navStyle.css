@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,420;1,420&display=swap');
+
+
+
+:root {
+    --theme-color: white;
+    --primary-color: #124f88;
+    --secundary-color: #F7C331;
+    --text-color-inverse: white;
+    --text-color: black;
+    --navbar-shallow-color: #e5e5e5;
+    --menu-mobile-background-color: #3A4460;
+    --font-logo-TableTrick: "Chivo", sans-serif;
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--theme-color);
+    color: var(--text-color);
+  }
+  
+  a {
+    text-decoration: none;
+    color: var(--text-color);
+  }
+
+
+.topheader {
+    box-shadow: 0 4px 5px var(--navbar-shallow-color);
+    position: fixed;
+    background-color: var(--theme-color);
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  
+  .topnav {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.625rem;
+    max-width: 87.5rem;
+    margin: 0 auto;
+    align-items: center;
+  }
+  
+  /* Logo */
+.topnav p{
+    font-family: var(--font-logo-TableTrick);
+    font-size: 1.5rem;
+}
+
+
+  /* Menu */
+  .menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .menu li {
+    padding: 0 0.9375rem;
+  }
+  
+  .menu a {
+    color: var(--text-color);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 3.125rem;
+    text-transform: uppercase;
+  
+    position: relative;
+  }
+  
+  .open-menu,
+  .close-menu {
+    display: none;
+  }
+  
+  .logotype {
+    display: flex;
+    justify-content: center;
+  }
+  
+  @media (max-width: 950px) {
+    /* Menu */
+    .menu {
+      flex-direction: column;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      align-items: center;
+      background-color: var(--menu-mobile-background-color);
+      height: 100%;
+      overflow-y: auto;
+  
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+  
+    .menu li {
+      padding: 0;
+    }
+  
+    .menu a {
+      color: var(--text-color-inverse);
+      line-height: 3.75rem;
+    }
+  
+    .open-menu,
+    .close-menu {
+      display: block;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+  
+    .close-menu {
+      align-self: flex-end;
+      padding: 1.25rem 0.9375rem;
+    }
+  
+    .menu_opened {
+      opacity: 1;
+      pointer-events: all;
+    }
+  
+    .open-menu:focus:not(:focus-visible),
+    .close-menu:focus:not(:focus-visible) {
+      outline: none;
+    }
+  }
