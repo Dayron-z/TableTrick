@@ -277,5 +277,7 @@
 
 
 .third-secction-opinion{
-  background-color: black;
+  background-color: #181E4B;
+  display: flex;
+  align-items: center;
 }
