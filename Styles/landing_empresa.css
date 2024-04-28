@@ -57,17 +57,17 @@
 
 
 
-/*First Secction*/
+/*First section*/
 .abstract-image-first-section{
     display: none;
 }
 
-.title-first-secction{
+.title-first-section{
     font-size: 1.0625rem;
     color: var(--secondary-color);
 }
 
-.subtitle-first-secction{
+.subtitle-first-section{
     color: var(--primary-color);
     font-family: var(--font-title-TableTrick);
     font-size: 3.325rem;
@@ -76,7 +76,7 @@
     position: relative;
 }
 
-.subtitle-first-secction img{
+.subtitle-first-section img{
   position: absolute;
   left: 100px;
   z-index: -10;
@@ -84,7 +84,7 @@
 }
 
 
-.first-secction-info{
+.first-section-info{
     display: flex;
     align-items: center;
     gap: 300px;
@@ -98,25 +98,25 @@
     justify-content: center;
 }
 
-.image-first-secction{
+.image-first-section{
     border-radius: 1.25rem;
     width: 26.75rem;
     height:  33rem;
 }
 
-.title-first-secction{
+.title-first-section{
   text-transform: uppercase;
 }
 
 
-.info-first-secction{
+.info-first-section{
   margin-top: 1.25rem;
   font-size: 1.125rem;
   margin-top: 2.8125rem;
   width: 28rem;
 }
 
-.buttons-first-secction{
+.buttons-first-section{
   display: flex;
   margin-top: 2.5rem;
   gap: 4.375rem;
@@ -159,7 +159,7 @@
 }
 
 
-.container-image-first-secction img{
+.container-image-first-section img{
   width: 200px;
 }
 
@@ -168,10 +168,10 @@
 /*  -------------------------- */
 /* Beginning of the second section  */
 /* -------------------------- */
-  .second-secction-info{
+  .second-section-info{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center;  
   }
 
   .we-offer{
@@ -194,7 +194,8 @@
   .box-offer{
     border-radius: 17px;
     background-color: rgb(243, 243, 243);
-    box-shadow: 2px 4px 4px var(--navbar-shallow-color);
+    box-shadow: 10px 5px 12
+    px var(--navbar-shallow-color);
     display: grid;
     align-items: center;
     justify-content: start;
@@ -216,26 +217,26 @@
 
 
   .box-offer-text{
-    width: 200px;
+    width: 12.5rem;
   }
 
 
   .box-offer{
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 1.25rem;
   }
 
 
 
   .box-offer-icon{
     background-color:var(--tertiary-color);
-    width: 60px;
-    height: 90px;
+    width: 3.75rem;
+    height: 5.625rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 20px; 
+    border-radius: 1.25rem; 
   }
 
   .box-offer-icon img{
@@ -252,8 +253,9 @@
 
 
 .box-offer-title{
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
+
 
 
 .box-offer-rectangle{
@@ -263,21 +265,77 @@
 
 .blue-rectangle{
   position: absolute;
-  top: 205px;
-  right: 220px;
+  top: 12.8125rem;
+  right: 13.75rem;
   z-index: -20;
+}
+
+
+.box-offer-down{
+  margin-top: 2.5rem;
 }
 
 
 
 
 /*  -------------------------- */
-/* Beginning of the second section  */
+/* Beginning of the third section  */
 /* -------------------------- */
 
 
-.third-secction-opinion{
-  background-color: #181E4B;
+
+.third-section-opinion{
+  background-color: var(--tertiary-color);
   display: flex;
   align-items: center;
+  display: flex;
+  flex-direction: column;
+} 
+
+
+
+.testimonials{
+  color: var(--secondary-color);
+  font-size: 25px;
+  margin-bottom: 20px;
 }
+
+.what-our-customers-say{
+  font-size: 50px;
+  font-family: var(--font-title-TableTrick);
+  color: var(--primary-color);
+}
+
+
+
+.companies-third-section{
+  height: 20%;
+  width: 75%;
+  display: flex;
+  margin-top: 4.25rem;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.companies-third-section div{
+  border-radius: 15px;
+  width: 30%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  box-shadow: 6px 10px  4px var(--navbar-shallow-color);
+
+} 
+
+
+
+
+.companies-third-section div img{
+  width: 60%;
+  height: 95%;
+} 

@@ -7,6 +7,9 @@
   box-sizing: border-box;
 }
 
+body{
+  place-items: center;
+}
 
 
 :root {
@@ -32,7 +35,6 @@
   
   
   .testimonial-container{
-    place-items: center;
     background-color: #393E46;
     color: #fff;
     border-radius: 5px;
