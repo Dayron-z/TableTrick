@@ -3,58 +3,41 @@ const testimonial = document.querySelector('.testimonial');
 const userImage = document.querySelector('.user-image');
 const username = document.querySelector('.username');
 const role = document.querySelector('.role');
-
 const testimonials = [
   {
-    name: 'Miyah Myles',
-    position: 'Marketing',
-    photo:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=707b9c33066bf8808c934c8ab394dff6',
+    name: 'Laura Sanchez',
+    position: 'Restaurant Manager',
+    photo: '/Images/mujer1.jpg',
     text:
-      "I've worked with literally hundreds of HTML/CSS developers and I have to say the top spot goes to this guy. This guy is an amazing developer. He stresses on good, clean code and pays heed to the details. I love developers who respect each and every aspect of a throughly thought out design and do their best to put it in code. He goes over and beyond and transforms ART into PIXELS - without a glitch, every time.",
+      'Incredible! This software has completely transformed the way we handle bookings at our restaurant. Its user-friendly interface and intuitive features have saved us time and allowed us to provide a more efficient service to our customers. Thanks to this software, we have seen a significant increase in our bookings and sales. Highly recommended!',
   },
   {
-    name: 'June Cha',
-    position: 'Software Engineer',
-    photo: 'https://randomuser.me/api/portraits/women/44.jpg',
+    name: 'Edwar Louis',
+    position: 'Executive Chef',
+    photo: '/Images/hombre4.jpg',
     text:
-      'This guy is an amazing frontend developer that delivered the task exactly how we need it, do your self a favor and hire him, you will not be disappointed by the work delivered. He will go the extra mile to make sure that you are happy with your project. I will surely work again with him!',
+      "Since implementing this software in our restaurant, we've experienced a significant improvement in booking management. Its simple interface and powerful tools have allowed us to optimize our operations and focus more on providing an exceptional experience to our customers. I can't imagine what our business would be like without this software!",
   },
   {
-    name: 'Iida Niskanen',
-    position: 'Data Entry',
-    photo: 'https://randomuser.me/api/portraits/women/68.jpg',
+    name: 'Michael Thompson',
+    position: 'Restaurant Consultant',
+    photo: '/Images/hombre3.jpg',
     text:
-      "This guy is a hard worker. Communication was also very good with him and he was very responsive all the time, something not easy to find in many freelancers. We'll definitely repeat with him.",
+      "I've recommended this software to several restaurant owners, and the feedback has been overwhelmingly positive. Its intuitive interface and robust features make it a valuable asset for any restaurant looking to streamline their booking process and increase efficiency. A must-have tool for restaurant management!",
   },
   {
-    name: 'Renee Sims',
-    position: 'Receptionist',
-    photo: 'https://randomuser.me/api/portraits/women/65.jpg',
+    name: 'Sophia Lee',
+    position: 'Restaurant Marketing Director',
+    photo: '/Images/mujer2.jpg',
     text:
-      "This guy does everything he can to get the job done and done right. This is the second time I've hired him, and I'll hire him again in the future.",
+      "From a marketing perspective, this software has been a game-changer for our restaurant. Its ability to integrate seamlessly with our marketing efforts has allowed us to attract more customers and drive sales. I highly recommend it to any restaurant looking to boost their marketing effectiveness!",
   },
   {
-    name: 'Jonathan Nunfiez',
-    position: 'Graphic Designer',
-    photo: 'https://randomuser.me/api/portraits/men/43.jpg',
+    name: 'Olivia White',
+    position: 'Restaurant Owner',
+    photo: '/Images/mujer3.jpg',
     text:
-      "I had my concerns that due to a tight deadline this project can't be done. But this guy proved me wrong not only he delivered an outstanding work but he managed to deliver 1 day prior to the deadline. And when I asked for some revisions he made them in MINUTES. I'm looking forward to work with him again and I totally recommend him. Thanks again!",
-  },
-  {
-    name: 'Sasha Ho',
-    position: 'Accountant',
-    photo:
-      'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?h=350&auto=compress&cs=tinysrgb',
-    text:
-      'This guy is a top notch designer and front end developer. He communicates well, works fast and produces quality work. We have been lucky to work with him!',
-  },
-  {
-    name: 'Veeti Seppanen',
-    position: 'Director',
-    photo: 'https://randomuser.me/api/portraits/men/97.jpg',
-    text:
-      'This guy is a young and talented IT professional, proactive and responsible, with a strong work ethic. He is very strong in PSD2HTML conversions and HTML/CSS technology. He is a quick learner, eager to learn new technologies. He is focused and has the good dynamics to achieve due dates and outstanding results.',
+      "As a restaurant owner, I can't imagine running my business without this software. It has simplified the booking process, improved our customer service, and ultimately helped us increase our revenue. It's an essential tool for any restaurant looking to thrive in today's competitive market!",
   },
 ]
 
