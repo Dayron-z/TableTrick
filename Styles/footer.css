@@ -6,6 +6,19 @@ body{
 }
 
 
+:root {
+    --theme-color: white;
+    --primary-color: #181E4B;
+    --secondary-color: #DF6951;
+    --tertiary-color :  #FFF1DA;
+    --text-color-inverse: white;
+    --text-color: black;
+    --navbar-shallow-color: #e5e5e5;
+    --menu-mobile-background-color: #3A4460;
+    --font-logo-TableTrick: "Chivo", sans-serif;
+    --font-title-TableTrick: "Volkhov", serif; 
+  }
+
 *{
 	margin:0;
 	padding:0;
@@ -25,7 +38,7 @@ ul{
 	list-style: none;
 }
 .footer{
-	background-color: #24262b;
+	background-color: var(--menu-mobile-background-color);
     padding: 70px 0;
 }
 .footer-col{
@@ -45,7 +58,7 @@ ul{
 	position: absolute;
 	left:0;
 	bottom: -10px;
-	background-color: #e91e63;
+	background-color: var(--secondary-color);
 	height: 2px;
 	box-sizing: border-box;
 	width: 50px;
@@ -67,11 +80,10 @@ ul{
 	color: #ffffff;
 	padding-left: 8px;
 }
-.footer-col .social-links a{
+.footer-col .social-links-footer a{
 	display: inline-block;
 	height: 40px;
 	width: 40px;
-	background-color: rgba(255,255,255,0.2);
 	margin:0 10px 10px 0;
 	text-align: center;
 	line-height: 40px;
@@ -79,7 +91,7 @@ ul{
 	color: #ffffff;
 	transition: all 0.5s ease;
 }
-.footer-col .social-links a:hover{
+.footer-col .social-links-footer a:hover{
 	color: #24262b;
 	background-color: #ffffff;
 }
