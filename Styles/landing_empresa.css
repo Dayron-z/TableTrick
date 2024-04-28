@@ -216,26 +216,26 @@
 
 
   .box-offer-text{
-    width: 200px;
+    width: 12.5rem;
   }
 
 
   .box-offer{
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 1.25rem;
   }
 
 
 
   .box-offer-icon{
     background-color:var(--tertiary-color);
-    width: 60px;
-    height: 90px;
+    width: 3.75rem;
+    height: 5.625rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 20px; 
+    border-radius: 1.25rem; 
   }
 
   .box-offer-icon img{
@@ -252,7 +252,7 @@
 
 
 .box-offer-title{
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 
 
@@ -263,8 +263,8 @@
 
 .blue-rectangle{
   position: absolute;
-  top: 205px;
-  right: 220px;
+  top: 12.8125rem;
+  right: 13.75rem;
   z-index: -20;
 }
 
@@ -272,8 +272,9 @@
 
 
 /*  -------------------------- */
-/* Beginning of the second section  */
+/* Beginning of the third section  */
 /* -------------------------- */
+
 
 
 .third-secction-opinion{
@@ -281,3 +282,4 @@
   display: flex;
   align-items: center;
 }
+
