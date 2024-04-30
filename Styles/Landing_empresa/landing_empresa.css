@@ -168,10 +168,13 @@
 /*  -------------------------- */
 /* Beginning of the second section  */
 /* -------------------------- */
+
   .second-section-info{
     display: flex;
     flex-direction: column;
-    justify-content: center;  
+    justify-content: start;  
+    padding-top: 120px;
+    position: relative;
   }
 
   .we-offer{
@@ -273,6 +276,16 @@
 
 .box-offer-down{
   margin-top: 2.5rem;
+}
+
+
+.woman-second-section{
+  width: 280px;
+  height: 330px;
+  border-radius: 100%;
+  position: absolute;
+  bottom: 100px;
+  left: 20px;
 }
 
 
