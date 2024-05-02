@@ -373,13 +373,17 @@
 }
 
 @media screen and (max-width: 1200px) {
-  main section{
+
+  main section:not(.column_left):not(.column_right) {
+    /* Estilos que deseas aplicar a todos los <section> dentro de <main> excepto los que tienen las clases column_left o column_right */
     padding: 25% 0%;
     min-height: 100vh;
     height: auto;
     display: flex;
     flex-direction: column;
   }
+
+
 
   html{
     font-size: 16px;
@@ -457,6 +461,8 @@
     justify-items: center; /* Centra horizontalmente */
     align-items: center; /* Centra verticalmente */
   }
+
+
   
 
   .what-our-customers-say, .we-offer{
@@ -477,4 +483,53 @@
     main  .fourth-section-opinion{
       padding: 2% 0%;
     }
+
+
+    main .fourth-section-opinion{
+      min-height: 20vh;
+    }
+
+    .container {
+      padding: 0px;
+    }
+
+   main .column_right{
+      padding-top: 0% 0%;
+    }
+
+
+    main .column_left{
+        padding: 0px 0px;
+    }
+
+
+    .contactTitle{
+      text-align: center;
+    }
+
+    .iconGroup{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .contactInfo{
+      text-align: center;
+    }
+
+    .contactInfo .icon{
+        display: none;
+    }
+
+
+    .socialMedia{
+      display: flex;
+      justify-content: center !important;
+    }
+
+    .send-message {
+      display: flex;
+      justify-content: center;
+    }
+    
 }

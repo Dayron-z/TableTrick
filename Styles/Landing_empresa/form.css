@@ -245,6 +245,7 @@ textarea::-webkit-scrollbar-thumb{
 	.container .row{
 		flex-wrap: nowrap;
 		flex-direction: column;
+
 		
 	}
 	.row section.left, .row section.right{
