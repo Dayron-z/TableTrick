@@ -149,7 +149,7 @@
 
 .play-button{
     position: absolute;
-    bottom: -2.625rem;
+    bottom: -44.4px;
     margin-left: 1.25rem;
 }
 
@@ -247,6 +247,14 @@
     width: 60%;
     height: 60%;
 
+  }
+
+  .box-offer-icon  .calendar {
+    height: 68%;
+  }
+
+  .box-offer-icon  .paper {
+    height: 68%;
   }
 
 
@@ -531,5 +539,31 @@
       display: flex;
       justify-content: center;
     }
+
+
+    .subtitle-first-section img{
+      display: none;
+
+    }
     
 }
+
+
+@media screen and (max-width: 768px) {
+  .fa-quote-right,
+  .fa-quote-left{
+    display: none;
+  }
+
+  .what-our-customers-say{
+    width: 90%;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  html{
+    font-size: 12.2px;
+    }
+
+  }
