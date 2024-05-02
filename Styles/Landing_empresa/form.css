@@ -254,3 +254,16 @@ textarea::-webkit-scrollbar-thumb{
 	}
 
 }
+
+
+@media screen and (max-width: 768px) {
+	.fa-quote-right,
+	.fa-quote-left{
+	  display: none;
+	}
+  
+	.what-our-customers-say{
+	  width: 90%;
+	}
+  
+  }
