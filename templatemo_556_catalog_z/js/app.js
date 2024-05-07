@@ -1,61 +1,77 @@
-async function fetchDataAndRender() {
+async function fetchDataAndRender(consulta) {
     try {
-        const response = await fetch('http://localhost:3000/reserva');
+        let url = 'http://localhost:3000/reserva';
+        
+        // Si se proporciona una consulta, agregarla como parámetro de búsqueda a la URL
+        if (consulta) {
+            url += `?nombre=${consulta.toLowerCase()}`; // Convertir la consulta a minúsculas
+        }
+        
+        const response = await fetch(url);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        const data = await response.json();
-        data.forEach(item => renderData(item));
+        let data = await response.json();
+
+
+        // Convertir los nombres en la respuesta a minúsculas
+        data = data.map(item => {
+            return {
+                ...item,
+                nombre: item.nombre.toLowerCase()
+            };
+        });
+
+        renderData(data);
     } catch (error) {
         console.error('Fetch error:', error);
     }
 }
 
+// Resto del código igual que antes...
 
-function renderData(item) {
+
+// Resto del código igual que antes...
+
+function renderData(data) {
     const galleryDiv = document.getElementById('bookings');
-    galleryDiv.innerHTML += `
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-            <figure class="effect-ming tm-video-item">
-                <img src="img/reservation.jpg" alt="Image" class="img-fluid">
-                <figcaption class="d-flex align-items-center justify-content-center name_and_time">
-                    <h2>${item.nombre}</h2>
-                    <h2>${item.fecha}</h2>
-                    <a href="photo-detail.html">View more</a>
-                </figcaption>                    
-            </figure>
-            <div class="d-flex justify-content-between tm-text-gray">
-                <span class="tm-text-gray-light">${item.fecha}</span>
-                <span>${item.estado}</span>
+    // Limpiar los resultados anteriores antes de renderizar nuevos resultados
+    galleryDiv.innerHTML = '';
+
+    data.forEach(item => {
+        galleryDiv.innerHTML += `
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                <figure class="effect-ming tm-video-item">
+                    <img src="img/reservation.jpg" alt="Image" class="img-fluid">
+                    <figcaption class="d-flex align-items-center justify-content-center name_and_time">
+                        <h2>${item.nombre}</h2>
+                        <h2>${item.fecha}</h2>
+                        <a href="photo-detail.html">View more</a>
+                    </figcaption>                    
+                </figure>
+                <div class="d-flex justify-content-between tm-text-gray">
+                    <span class="tm-text-gray-light">${item.fecha}</span>
+                    <span>${item.estado}</span>
+                </div>
             </div>
-        </div>
-    `;
+        `;
+    });
 }
-// Llama a la función para iniciar el proceso
-fetchDataAndRender();
 
+// Seleccionar el input de búsqueda
+const inputBusqueda = document.querySelector('.tm-search-input');
 
+// Agregar un listener de evento para capturar el evento de entrada
+inputBusqueda.addEventListener('input', function(event) {
+    // Obtener el valor de búsqueda del input
+    const consulta = event.target.value.trim(); // Obtener el valor y eliminar los espacios en blanco al inicio y al final
 
-document.addEventListener("keyup", (e) => {
-  
-})
+    // Llamar a la función para realizar la búsqueda con el valor obtenido
+    fetchDataAndRender(consulta);
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Llama a la función para iniciar el proceso (sin consulta inicial)
+fetchDataAndRender('');
 
 
 
