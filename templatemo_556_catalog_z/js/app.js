@@ -1,14 +1,10 @@
 
 
 
-async function fetchDataAndRender(consulta) {
+async function fetchDataAndRender() {
     try {
-        let url = 'http://localhost:3000/reserva';
+        let url = 'http://localhost:8080/api/sistemareservas/v1/cliente';
         
-        // Si se proporciona una consulta, agregarla como parámetro de búsqueda a la URL
-        if (consulta) {
-            url += `?nombre=${consulta}`; // Convertir la consulta a minúsculas
-        }
         
         const response = await fetch(url);
         if (!response.ok) {
@@ -17,7 +13,6 @@ async function fetchDataAndRender(consulta) {
         let data = await response.json();
 
 
-        console.log(data);
 
         renderData(data);
     } catch (error) {
@@ -35,26 +30,30 @@ function renderData(data) {
     const galleryDiv = document.getElementById('bookings');
     // Limpiar los resultados anteriores antes de renderizar nuevos resultados
     galleryDiv.innerHTML = '';
+    console.log(data);
 
-    data.forEach(item => {
+
+    data.content.forEach(item => {
         galleryDiv.innerHTML += `
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
                     <img src="img/reservation.jpg" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center name_and_time">
                         <h2>${item.nombre}</h2>
-                        <h2>${item.fecha}</h2>
+                        <h2>${item.apellido}</h2>
                         <a href="photo-detail.html">View more</a>
                     </figcaption>                    
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">${item.fecha}</span>
-                    <span>${item.estado}</span>
+                    <span class="tm-text-gray-light">${item.apellido}</span>
+                    <span>${item.apellido}</span>
                 </div>
             </div>
         `;
     });
 }
+
+
 
 // Seleccionar el input de búsqueda
 const inputBusqueda = document.querySelector('.tm-search-input');
@@ -81,7 +80,7 @@ function capitalizeWords(sentence) {
 
 
 // Llama a la función para iniciar el proceso (sin consulta inicial)
-fetchDataAndRender('');
+fetchDataAndRender();
 
 
 
