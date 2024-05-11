@@ -1,10 +1,13 @@
+
+
+
 async function fetchDataAndRender(consulta) {
     try {
         let url = 'http://localhost:3000/reserva';
         
         // Si se proporciona una consulta, agregarla como parámetro de búsqueda a la URL
         if (consulta) {
-            url += `?nombre=${consulta.toLowerCase()}`; // Convertir la consulta a minúsculas
+            url += `?nombre=${consulta}`; // Convertir la consulta a minúsculas
         }
         
         const response = await fetch(url);
@@ -14,19 +17,14 @@ async function fetchDataAndRender(consulta) {
         let data = await response.json();
 
 
-        // Convertir los nombres en la respuesta a minúsculas
-        data = data.map(item => {
-            return {
-                ...item,
-                nombre: item.nombre.toLowerCase()
-            };
-        });
+        console.log(data);
 
         renderData(data);
     } catch (error) {
         console.error('Fetch error:', error);
     }
 }
+
 
 // Resto del código igual que antes...
 
@@ -61,14 +59,26 @@ function renderData(data) {
 // Seleccionar el input de búsqueda
 const inputBusqueda = document.querySelector('.tm-search-input');
 
-// Agregar un listener de evento para capturar el evento de entrada
 inputBusqueda.addEventListener('input', function(event) {
     // Obtener el valor de búsqueda del input
     const consulta = event.target.value.trim(); // Obtener el valor y eliminar los espacios en blanco al inicio y al final
+    
+    // Capitalizar la consulta
+    const consultaCapitalizada = capitalizeWords(consulta);
 
-    // Llamar a la función para realizar la búsqueda con el valor obtenido
-    fetchDataAndRender(consulta);
+    // Llamar a la función para realizar la búsqueda con el valor capitalizado
+    fetchDataAndRender(consultaCapitalizada);
 });
+
+
+
+function capitalizeWords(sentence) {
+    return sentence
+      .split(" ")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+  }
+
 
 // Llama a la función para iniciar el proceso (sin consulta inicial)
 fetchDataAndRender('');

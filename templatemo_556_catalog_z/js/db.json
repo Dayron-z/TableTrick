@@ -2,7 +2,7 @@
     "reserva": [
       {
         "id": 1,
-        "nombre": "andres pastrana",
+        "nombre": "Andres Pastrana",
         "fecha": "2024-05-06",
         "estado": "Activa"
       },
@@ -20,7 +20,7 @@
       },
       {
         "id": 4,
-        "nombre": "Andres pastrana",
+        "nombre": "Andres Pastrana",
         "fecha": "2024-05-09",
         "estado": "Activa"
       },
