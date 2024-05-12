@@ -1,46 +1,84 @@
+//Selectores 
+const form = document.getElementById("editForm"); 
+
+
 document.addEventListener("DOMContentLoaded", function() {
-    // Obtener el ID de reserva almacenado en localStorage
-    const selectedBookingId = localStorage.getItem('selectedBookingId');
+ // Obtener el ID de reserva almacenado en localStorage
+ const selectedBookingId = localStorage.getItem('selectedBookingId');
+
+ if (!selectedBookingId) {
+     console.error('No se ha encontrado un ID de reserva en el almacenamiento local.');
+     return; // Salir de la función si no hay ID de reserva
+ }
+
+ cargarDatosEspecificos(selectedBookingId);
+
+ async function cargarDatosEspecificos(bookingId) {
+     try {
+         const url = `http://localhost:8080/api/sistemareservas/v1/cliente/id/${bookingId}`;
+         const response = await fetch(url);
+         if (!response.ok) {
+             throw new Error('Network response was not ok');
+         }
+
+         const data = await response.json(); 
+
+         console.log(data);
+
+         pintarDatos(data);
+
+     } catch (error) {
+         console.log("Error: ",  error + " catch");
+     }
+ }
 
 
-    async function cargarDatosEspecificos() {
-        try {
-            const url = `http://localhost:8080/api/sistemareservas/v1/cliente/id/${selectedBookingId}`
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const data = await response.json(); 
-
-            console.log(data);
-
-
-        } catch (error) {
-            console.log("Error: ",  error + " catch");
-        }
-    }
-
-
-    function pintarDatos() {
-        //Donde vamos a inyectar
-        const galleryDiv = document.getElementById('bookings');
-
-
-
-
-
-
-
-        
-    }
+ function pintarDatos(data) {
+     //Donde vamos a inyectar
+     const infoDiv = document.getElementById('info-details');
+     infoDiv.innerHTML = `
+         <div class="tm-bg-gray tm-video-details">
+             <p class="mb-4">
+                 Name: ${data.nombre}
+             </p>
+             <p class="mb-4">
+                 Description: ${data.nombre}
+             </p>
+             <p class="mb-4">
+                 Date: ${data.nombre}
+             </p>
+             <p class="mb-4">
+                 Time: ${data.nombre}
+             </p>
+             <p class="mb-4">
+                 Nombre: ${data.nombre}
+             </p>
+             <div class="text-center mb-5 d-flex justify-content-center">
+                 <a href="#" id="editBtn" class="btn btn-primary tm-btn-big mr-3" data-toggle="modal" data-target="#editModal">Edit</a>
+                 <a href="#" id="deleteBtn" class="btn btn-danger tm-btn-big">Delete</a>
+             </div>  
+         </div>
+     `;
 
 
 
+     //Selectores
+     document.getElementById("inputTitle").value = data.nombre
+     document.getElementById("inputDescription").value = data.nombre
+     document.getElementById("inputDate").value = "2024-05-12"
+     document.getElementById("inputTime").value = "14:30"
 
 
 
+     document.getElementById("editBtn").addEventListener("click", (e) => {
+        const data = e.target.parentElement.parentElement;
 
+
+
+    })
+    
+
+ }
 
 
 
