@@ -19,6 +19,9 @@ async function cargarInformacion() {
             throw new Error('Network response was not ok');
         }
         const data = await response.json();
+
+        console.log(url);
+
         renderData(data);
     } catch (error) {
         console.error('Fetch error:', error);
@@ -30,12 +33,15 @@ async function cargarInformacion() {
 
 // Función para renderizar los datos
 function renderData(data) {
+    console.log(data);
     const galleryDiv = document.getElementById('bookings');
     // Limpiar los resultados anteriores antes de renderizar nuevos resultados
     galleryDiv.innerHTML = '';
 
-    if (data && data.content) {
-        data.content.forEach(item => {
+    let itemsToRender = data.content || data;
+    
+    if (itemsToRender.length > 0) {
+        itemsToRender.forEach(item => {
             galleryDiv.innerHTML += `
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                     <figure class="effect-ming tm-video-item">
@@ -53,8 +59,6 @@ function renderData(data) {
                 </div>
             `;
         });
-    } else {
-        console.error('Data or data.content is undefined');
     }
 }
 
