@@ -1,4 +1,3 @@
-alert("fsdhuish")
 $(document).ready(function() {
     // Inicializa el calendario
     var calendarEl = document.getElementById('calendar');
