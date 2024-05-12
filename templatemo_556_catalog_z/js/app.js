@@ -1,116 +1,173 @@
-// Función para cargar la información inicial o buscar por nombre según el valor del input
-async function cargarInformacion() {
-    try {
-        const inputBusqueda = document.querySelector('.tm-search-input');
-        const consulta = inputBusqueda.value.trim();
+document.addEventListener("DOMContentLoaded", function() {
+    const pagination = document.getElementById("pagination");
+    const prevBtn = pagination.querySelector(".tm-btn-prev");
+    const nextBtn = pagination.querySelector(".tm-btn-next");
+    const pagingLinksContainer = pagination.querySelector(".tm-paging");
 
-        let url;
-        if (consulta) {
-            // Si hay una consulta, realizar la búsqueda por nombre
-            const consultaCapitalizada = capitalizeWords(consulta);
-            url = `http://localhost:8080/api/sistemareservas/v1/cliente/consulta?nombre=${consultaCapitalizada}`;
-        } else {
-            // Si no hay consulta, cargar la información inicial
-            url = 'http://localhost:8080/api/sistemareservas/v1/cliente';
+    let selectedNumber = 1; // Variable para almacenar el número seleccionado inicialmente
+
+    // Función para calcular los números de la paginación
+    function calcularNumerosPaginacion(selectedNumber) {
+        const numerosPagina = [];
+        const cantidadNumeros = 4; // Cantidad de números de paginación a mostrar
+        let startNumber = selectedNumber - Math.floor(cantidadNumeros / 2);
+
+        // Ajustar el inicio si es menor que 1
+        if (startNumber < 1) {
+            startNumber = 1;
         }
 
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+        // Generar números de página consecutivos
+        for (let i = 0; i < cantidadNumeros; i++) {
+            numerosPagina.push(startNumber + i);
         }
-        const data = await response.json();
 
-        console.log(url);
-
-        renderData(data);
-    } catch (error) {
-        console.error('Fetch error:', error);
-    }
-}
-
-
-// Función para renderizar datos
-function renderData(data) {
-    console.log(data);
-    const galleryDiv = document.getElementById('bookings');
-    // Limpiar los resultados anteriores antes de renderizar nuevos resultados
-    galleryDiv.innerHTML = '';
-
-    let itemsToRender = data.content || data;
-    
-    if (itemsToRender.length > 0) {
-        itemsToRender.forEach(item => {
-            const bookingContainer = document.createElement('div');
-            bookingContainer.classList.add('col-xl-3', 'col-lg-4', 'col-md-6', 'col-sm-6', 'col-12', 'mb-5', 'booking-container');
-            bookingContainer.innerHTML = `
-                <figure class="effect-ming tm-video-item">
-                    <img src="img/reservation.jpg" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center name_and_time">
-                        <h2>${item.nombre}</h2>
-                        <h2>${item.apellido}</h2>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">${item.apellido}</span>
-                    <span>${item.apellido}</span>
-                </div>
-            `;
-            // Asignar el ID de reserva al contenedor
-            bookingContainer.dataset.bookingId = item.id;
-            console.log(bookingContainer);
-            // Agregar el nuevo elemento al contenedor principal
-            galleryDiv.appendChild(bookingContainer);
-        });
+        return numerosPagina;
     }
 
-    // Adjuntar el evento de clic a los elementos booking-container después de renderizar los datos
-    attachClickEventToBookingContainers();
-}
+    // Función para cargar la información y actualizar la paginación
+    async function cargarInformacionYActualizarPaginacion(selectedNumber, consulta = '') {
+        try {
+            const url = consulta ? `http://localhost:8080/api/sistemareservas/v1/cliente/consulta?nombre=${consulta}&page=${selectedNumber}` 
+                                 : `http://localhost:8080/api/sistemareservas/v1/cliente?page=${selectedNumber}`;
 
-// Función para adjuntar el evento de clic a los elementos booking-container
-function attachClickEventToBookingContainers() {
-    const bookingContainers = document.querySelectorAll('.booking-container');
-    bookingContainers.forEach(container => {
-        container.addEventListener('click', () => {
-            console.log('Clic en booking-container');
-            // Obtener el ID del elemento específico
-            const bookingId = container.dataset.bookingId; // Suponiendo que el ID se almacena en un atributo data-booking-id
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
 
-            // Almacenar el ID en localStorage
-            localStorage.setItem('selectedBookingId', bookingId);
+            // Actualizar la paginación
+            actualizarPaginacion(selectedNumber);
 
-            // Redirigir a otra vista
-            window.location.href = 'photo-detail.html'; // Reemplaza 'otra_vista.html' con la URL de tu otra vista
+            // Renderizar los datos
+            renderData(data);
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+    }
+
+    // Función para actualizar la paginación
+    function actualizarPaginacion(selectedNumber) {
+        // Limpiar la paginación existente
+        pagingLinksContainer.innerHTML = '';
+
+        // Calcular los números de la paginación
+        const numerosPagina = calcularNumerosPaginacion(selectedNumber);
+
+        // Agregar los números de la paginación al contenedor
+        numerosPagina.forEach(function(numero) {
+            const link = document.createElement("a");
+            link.href = "javascript:void(0);";
+            link.classList.add("tm-paging-link");
+            if (numero === selectedNumber) {
+                link.classList.add("active");
+            }
+            link.textContent = numero;
+            pagingLinksContainer.appendChild(link);
         });
+
+        // Habilitar o deshabilitar botón "Previous"
+        prevBtn.disabled = selectedNumber === 1;
+    }
+
+    // Manejar eventos de clic en números de la paginación
+    pagingLinksContainer.addEventListener("click", async function(event) {
+        const link = event.target;
+        if (link.classList.contains("tm-paging-link")) {
+            selectedNumber = parseInt(link.textContent); // Actualizar selectedNumber
+            await cargarInformacionYActualizarPaginacion(selectedNumber);
+        }
     });
-}
 
-// Seleccionar el input de búsqueda y adjuntar evento de input
-const inputBusqueda = document.querySelector('.tm-search-input');
-inputBusqueda.addEventListener('input', cargarInformacion);
+    // Manejar evento de clic en botón "Previous"
+    prevBtn.addEventListener("click", async function() {
+        if (selectedNumber > 1) {
+            selectedNumber--; // Decrementar selectedNumber
+            await cargarInformacionYActualizarPaginacion(selectedNumber);
+        }
+    });
 
-// Capitalizar palabras de una oración
-function capitalizeWords(sentence) {
-    return sentence
-      .split(" ")
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join(" ");
-}
+    // Manejar evento de clic en botón "Next Page"
+    nextBtn.addEventListener("click", async function() {
+        selectedNumber++; // Incrementar selectedNumber
+        await cargarInformacionYActualizarPaginacion(selectedNumber);
+    });
 
-// Llamar a la función para cargar la información inicial al cargar la página
-cargarInformacion();
+    // Llamar a la función para cargar la información inicial al cargar la página
+    cargarInformacionYActualizarPaginacion(selectedNumber);
 
+    // Seleccionar el input de búsqueda y adjuntar evento de input
+    const inputBusqueda = document.querySelector('.tm-search-input');
+    inputBusqueda.addEventListener('input', async function() {
+        const consulta = inputBusqueda.value.trim();
+        selectedNumber = 1; // Resetear el número de página al buscar
+        await cargarInformacionYActualizarPaginacion(selectedNumber, consulta);
+    });
 
+    // Capitalizar palabras de una oración
+    function capitalizeWords(sentence) {
+        return sentence
+          .split(" ")
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+          .join(" ");
+    }
 
+    // Función para renderizar datos
+    function renderData(data) {
+        const galleryDiv = document.getElementById('bookings');
+        // Limpiar los resultados anteriores antes de renderizar nuevos resultados
+        galleryDiv.innerHTML = '';
 
+        let itemsToRender = data.content || data;
+        
+        if (itemsToRender.length > 0) {
+            itemsToRender.forEach(item => {
+                const bookingContainer = document.createElement('div');
+                bookingContainer.classList.add('col-xl-3', 'col-lg-4', 'col-md-6', 'col-sm-6', 'col-12', 'mb-5', 'booking-container');
+                bookingContainer.innerHTML = `
+                    <figure class="effect-ming tm-video-item">
+                        <img src="img/reservation.jpg" alt="Image" class="img-fluid">
+                        <figcaption class="d-flex align-items-center justify-content-center name_and_time">
+                            <h2>${item.nombre}</h2>
+                            <h2>${item.apellido}</h2>
+                        </figcaption>                    
+                    </figure>
+                    <div class="d-flex justify-content-between tm-text-gray">
+                        <span class="tm-text-gray-light">${item.apellido}</span>
+                        <span>${item.apellido}</span>
+                    </div>
+                `;
+                // Asignar el ID de reserva al contenedor
+                bookingContainer.dataset.bookingId = item.id;
 
+                // Agregar el nuevo elemento al contenedor principal
+                galleryDiv.appendChild(bookingContainer);
+            });
+        }
 
+        // Adjuntar el evento de clic a los elementos booking-container después de renderizar los datos
+        attachClickEventToBookingContainers();
+    }
 
+    // Función para adjuntar el evento de clic a los elementos booking-container
+    function attachClickEventToBookingContainers() {
+        const bookingContainers = document.querySelectorAll('.booking-container');
+        bookingContainers.forEach(container => {
+            container.addEventListener('click', () => {
+                console.log('Clic en booking-container');
+                // Obtener el ID del elemento específico
+                const bookingId = container.dataset.bookingId; // Suponiendo que el ID se almacena en un atributo data-booking-id
 
+                // Almacenar el ID en localStorage
+                localStorage.setItem('selectedBookingId', bookingId);
 
-
-
-
+                // Redirigir a otra vista
+                window.location.href = 'photo-detail.html'; // Reemplaza 'otra_vista.html' con la URL de tu otra vista
+            });
+        });
+    }
+});
 
 
 
