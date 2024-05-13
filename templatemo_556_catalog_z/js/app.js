@@ -17,9 +17,12 @@ document.addEventListener("DOMContentLoaded", function() {
             startNumber = 1;
         }
 
+
+        console.log(startNumber);
         // Generar números de página consecutivos
         for (let i = 0; i < cantidadNumeros; i++) {
             numerosPagina.push(startNumber + i);
+            console.log(numerosPagina);
         }
 
         return numerosPagina;
@@ -118,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const galleryDiv = document.getElementById('bookings');
         // Limpiar los resultados anteriores antes de renderizar nuevos resultados
         galleryDiv.innerHTML = '';
-
+    
         let itemsToRender = data.content || data;
         
         if (itemsToRender.length > 0) {
@@ -140,12 +143,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 `;
                 // Asignar el ID de reserva al contenedor
                 bookingContainer.dataset.bookingId = item.id;
-
+    
                 // Agregar el nuevo elemento al contenedor principal
                 galleryDiv.appendChild(bookingContainer);
             });
+        } else {
+            // Si no hay resultados, mostrar un mensaje "Sin resultados"
+            const noResultsMessage = document.createElement('h1');
+            noResultsMessage.textContent = 'Sin resultados';
+            galleryDiv.appendChild(noResultsMessage);
         }
-
+    
         // Adjuntar el evento de clic a los elementos booking-container después de renderizar los datos
         attachClickEventToBookingContainers();
     }

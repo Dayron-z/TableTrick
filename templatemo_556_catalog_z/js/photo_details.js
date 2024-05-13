@@ -32,6 +32,52 @@ document.addEventListener("DOMContentLoaded", function() {
      }
  }
 
+ 
+
+     //Selectores (Importantes para pintar)
+    // const title = document.getElementById("inputTitle").value = data.nombre
+    // const description = document.getElementById("inputDescription").value = data.nombre
+    // const date  = document.getElementById("inputDate").value = "2024-05-12"
+    // const time  = document.getElementById("inputTime").value = "14:30"
+
+
+ async function postData() {
+    const selectedBookingId = localStorage.getItem('selectedBookingId');
+    const url = `http://localhost:8080/api/sistemareservas/v1/cliente/id/${selectedBookingId}`
+
+
+    const updateBooking = {
+        "nombre": "Dayron",
+        "apellido": "ApellidoEjemplo",
+        "email": "ejemplo@correo.com",
+        "contraseña": "contraseña123",
+        "telefono": "123456789"
+      }
+
+    const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updateBooking)
+    });
+    return response.json();
+}
+
+
+async function deleteData() {
+    const selectedBookingId = localStorage.getItem('selectedBookingId');
+    const url = `http://localhost:8080/api/sistemareservas/v1/cliente/id/${selectedBookingId}`
+    
+     await fetch(url, {
+        method: "DELETE", 
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+}
+
+
 
  function pintarDatos(data) {
      //Donde vamos a inyectar
@@ -60,78 +106,17 @@ document.addEventListener("DOMContentLoaded", function() {
          </div>
      `;
 
+     const editBtn = document.getElementById("editBtn");
+     const deleteBtn = document.getElementById("deleteBtn");
+     const saveChangesBtn = document.getElementById("saveChangesBtn");
+ 
+     editBtn.addEventListener("click", function() {
+         const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+         editModal.show();
+     });
 
 
-     //Selectores
-     document.getElementById("inputTitle").value = data.nombre
-     document.getElementById("inputDescription").value = data.nombre
-     document.getElementById("inputDate").value = "2024-05-12"
-     document.getElementById("inputTime").value = "14:30"
-
-
-
-     document.getElementById("editBtn").addEventListener("click", (e) => {
-        const data = e.target.parentElement.parentElement;
-
-
-
-    })
-    
-
- }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    const editBtn = document.getElementById("editBtn");
-    const deleteBtn = document.getElementById("deleteBtn");
-    const saveChangesBtn = document.getElementById("saveChangesBtn");
-
-    editBtn.addEventListener("click", function() {
-        const editModal = new bootstrap.Modal(document.getElementById('editModal'));
-        editModal.show();
-    });
-
-    saveChangesBtn.addEventListener("click", function() {
-        // Realizar la lógica para guardar los cambios aquí
-
-        // Cerrar el modal y esperar a que se complete
-        location.reload(); 
-    });
-
-    deleteBtn.addEventListener("click", function() {
+     deleteBtn.addEventListener("click", function() {
         // Mostrar SweetAlert para confirmar la eliminación
         Swal.fire({
             title: '¿Estás seguro?',
@@ -143,11 +128,30 @@ document.addEventListener("DOMContentLoaded", function() {
             confirmButtonText: 'Sí, eliminarlo'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Aquí puedes realizar la acción de eliminación
-                console.log("Elemento eliminado");
+                deleteData(); 
+                alert("Eliminado correctamente")
+                window.location.href = 'index.html';
             }
         });
     });
+    
+
+    
+    saveChangesBtn.addEventListener("click", async function() {
+        alert("Rece")
+        // Realizar la lógica para guardar los cambios aquí
+        await postData(); 
+        location.reload()
+        // Cerrar el modal y esperar a que se complete
+    });
+
+ }
+
+
+    
+
+
+
 
     // Ocultar el modal de edición al inicio
     const editModal = new bootstrap.Modal(document.getElementById('editModal'));
@@ -160,11 +164,6 @@ document.addEventListener("DOMContentLoaded", function() {
         $('.modal-backdrop').remove();
     });
 
-    // Función para cargar información de reserva específica
-    async function cargarReservaEspecifica() {
-        let url = "http://localhost:8080/api/sistemareservas/v1/cliente"; 
-        const response = await fetch(url); 
-    }
 
     cargarDatosEspecificos();
 
