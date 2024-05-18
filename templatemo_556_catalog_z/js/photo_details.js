@@ -2,6 +2,8 @@
 const form = document.getElementById("editForm"); 
 
 
+
+
 document.addEventListener("DOMContentLoaded", function() {
  // Obtener el ID de reserva almacenado en localStorage
  const selectedBookingId = localStorage.getItem('selectedBookingId');
@@ -29,6 +31,11 @@ document.addEventListener("DOMContentLoaded", function() {
          
 
          pintarDatos(data);
+        document.getElementById("inputType").value = data.tipo
+        document.getElementById("inputTime").value = data.hora
+        document.getElementById("inputDate").value = data.fecha
+        document.getElementById("inputDescription").value = data.descripcion
+        document.getElementById("inputAmount").value = data.cantidadPersonas
 
      } catch (error) {
          console.log("Error: ",  error + " catch");
@@ -38,34 +45,55 @@ document.addEventListener("DOMContentLoaded", function() {
  
 
      //Selectores (Importantes para pintar)
-    // const title = document.getElementById("inputTitle").value = data.nombre
-    // const description = document.getElementById("inputDescription").value = data.nombre
-    // const date  = document.getElementById("inputDate").value = "2024-05-12"
-    // const time  = document.getElementById("inputTime").value = "14:30"
 
 
- async function postData() {
-    const selectedBookingId = localStorage.getItem('selectedBookingId');
-    const url = `http://localhost:8080/api/sistemareservas/v1/reserva/${selectedBookingId}`
+function dataUpdate() {
+    
+    const type  = document.getElementById("inputType").value
+    const time  = document.getElementById("inputTime").value
+    const date  = document.getElementById("inputDate").value
+    const description = document.getElementById("inputDescription").value
+    const amount = document.getElementById("inputAmount").value
+
+
+    console.log(type);
+    console.log(time);
+    console.log(date);
+    console.log(description);
+    console.log(amount);
+    alert("frene")
 
 
     const updateBooking = {
-        "nombre": "Dayron",
-        "apellido": "ApellidoEjemplo",
-        "email": "ejemplo@correo.com",
-        "contraseña": "contraseña123",
-        "telefono": "123456789"
-      }
+        "hora": time,
+        "fecha": date,
+        "tipo": type,
+        "cantidadPersonas": amount,
+        "descripcion": description,
+        "idCliente": "1de22700-1f52-453a-a0b8-638dcc46ae26",
+        "idRestaurante": "f0193347-806a-4b84-ae5d-547bfae7a9e2"
+    }
+
+    return updateBooking
+}
+
+
+async function postData() {
+    const dataToUpdate = dataUpdate(); // Llamar a la función dataUpdate para obtener los datos actualizados
+    
+    const selectedBookingId = localStorage.getItem('selectedBookingId');
+    const url = `http://localhost:8080/api/sistemareservas/v1/reserva/${selectedBookingId}`;
 
     const response = await fetch(url, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(updateBooking)
+        body: JSON.stringify(dataToUpdate) // Llamar a la función dataUpdate para obtener los datos actualizados
     });
     return response.json();
 }
+
 
 
 async function deleteData() {
@@ -88,8 +116,11 @@ async function deleteData() {
      infoDiv.innerHTML = `
          <div class="tm-bg-gray tm-video-details">
              <p class="mb-4">
-                 Client Name: ${data.cliente.nombre + " " + data.cliente.apellido}
+                 Type: ${data.tipo}
              </p>
+             <p class="mb-4">
+                Amount: ${data.cantidadPersonas}
+            </p>
              <p class="mb-4">
                  Description: ${data.descripcion}
              </p>
