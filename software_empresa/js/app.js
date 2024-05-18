@@ -141,8 +141,8 @@ document.addEventListener("DOMContentLoaded", function() {
                             <h2>${item.cliente.apellido}</h2>
                         </figcaption>                    
                     </figure>
-                    <div class="d-flex justify-content-between tm-text-gray">
-                        <span class="tm-text-gray-light">${item.cliente.email}</span>
+                    <div class="d-flex justify-content-between">
+                        <span>${item.cliente.email}</span>
                         <span>${item.cliente.telefono}</span>
                     </div>
                 `;
