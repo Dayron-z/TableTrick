@@ -31,8 +31,12 @@ document.addEventListener("DOMContentLoaded", function() {
     // Función para cargar la información y actualizar la paginación
     async function cargarInformacionYActualizarPaginacion(selectedNumber, consulta = '') {
         try {
-            const url = consulta ? `http://localhost:8080/api/sistemareservas/v1/reserva/consulta?nombre=${consulta}&page=${selectedNumber}` 
+            const url = consulta ? `http://localhost:8080/api/sistemareservas/v1/reserva/consulta?nombreCliente=${consulta}&page=${selectedNumber}` 
                                  : `http://localhost:8080/api/sistemareservas/v1/reserva?page=${selectedNumber}`;
+
+                                 
+
+                                 console.log(url);
 
             const response = await fetch(url);
             if (!response.ok) {
