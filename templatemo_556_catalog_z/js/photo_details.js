@@ -5,6 +5,7 @@ const form = document.getElementById("editForm");
 document.addEventListener("DOMContentLoaded", function() {
  // Obtener el ID de reserva almacenado en localStorage
  const selectedBookingId = localStorage.getItem('selectedBookingId');
+ console.log(selectedBookingId);
 
  if (!selectedBookingId) {
      console.error('No se ha encontrado un ID de reserva en el almacenamiento local.');
@@ -15,7 +16,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
  async function cargarDatosEspecificos(bookingId) {
      try {
-         const url = `http://localhost:8080/api/sistemareservas/v1/cliente/id/${bookingId}`;
+         const url = `http://localhost:8080/api/sistemareservas/v1/reserva/${bookingId}`;
+         console.log(url);
          const response = await fetch(url);
          if (!response.ok) {
              throw new Error('Network response was not ok');
@@ -24,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
          const data = await response.json(); 
 
          console.log(data);
+         
 
          pintarDatos(data);
 
@@ -43,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
  async function postData() {
     const selectedBookingId = localStorage.getItem('selectedBookingId');
-    const url = `http://localhost:8080/api/sistemareservas/v1/cliente/id/${selectedBookingId}`
+    const url = `http://localhost:8080/api/sistemareservas/v1/reserva/${selectedBookingId}`
 
 
     const updateBooking = {
@@ -67,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 async function deleteData() {
     const selectedBookingId = localStorage.getItem('selectedBookingId');
-    const url = `http://localhost:8080/api/sistemareservas/v1/cliente/id/${selectedBookingId}`
+    const url = `http://localhost:8080/api/sistemareservas/v1/reserva/${selectedBookingId}`
     
      await fetch(url, {
         method: "DELETE", 
@@ -85,19 +88,19 @@ async function deleteData() {
      infoDiv.innerHTML = `
          <div class="tm-bg-gray tm-video-details">
              <p class="mb-4">
-                 Name: ${data.nombre}
+                 Client Name: ${data.cliente.nombre + " " + data.cliente.apellido}
              </p>
              <p class="mb-4">
-                 Description: ${data.nombre}
+                 Description: ${data.descripcion}
              </p>
              <p class="mb-4">
-                 Date: ${data.nombre}
+                 Date: ${data.fecha}
              </p>
              <p class="mb-4">
-                 Time: ${data.nombre}
+                 Time: ${data.hora}
              </p>
              <p class="mb-4">
-                 Nombre: ${data.nombre}
+                 Restaurant: ${data.restaurante.nombreComercial}
              </p>
              <div class="text-center mb-5 d-flex justify-content-center">
                  <a href="#" id="editBtn" class="btn btn-primary tm-btn-big mr-3" data-toggle="modal" data-target="#editModal">Edit</a>

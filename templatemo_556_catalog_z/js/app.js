@@ -31,8 +31,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // Función para cargar la información y actualizar la paginación
     async function cargarInformacionYActualizarPaginacion(selectedNumber, consulta = '') {
         try {
-            const url = consulta ? `http://localhost:8080/api/sistemareservas/v1/cliente/consulta?nombre=${consulta}&page=${selectedNumber}` 
-                                 : `http://localhost:8080/api/sistemareservas/v1/cliente?page=${selectedNumber}`;
+            const url = consulta ? `http://localhost:8080/api/sistemareservas/v1/reserva/consulta?nombre=${consulta}&page=${selectedNumber}` 
+                                 : `http://localhost:8080/api/sistemareservas/v1/reserva?page=${selectedNumber}`;
 
             const response = await fetch(url);
             if (!response.ok) {
@@ -124,6 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
         let itemsToRender = data.content || data;
         
+        
         if (itemsToRender.length > 0) {
             itemsToRender.forEach(item => {
                 const bookingContainer = document.createElement('div');
@@ -132,13 +133,13 @@ document.addEventListener("DOMContentLoaded", function() {
                     <figure class="effect-ming tm-video-item">
                         <img src="img/reservation.jpg" alt="Image" class="img-fluid">
                         <figcaption class="d-flex align-items-center justify-content-center name_and_time">
-                            <h2>${item.nombre}</h2>
-                            <h2>${item.apellido}</h2>
+                            <h2>${item.cliente.nombre}</h2>
+                            <h2>${item.cliente.apellido}</h2>
                         </figcaption>                    
                     </figure>
                     <div class="d-flex justify-content-between tm-text-gray">
-                        <span class="tm-text-gray-light">${item.apellido}</span>
-                        <span>${item.apellido}</span>
+                        <span class="tm-text-gray-light">${item.cliente.email}</span>
+                        <span>${item.cliente.telefono}</span>
                     </div>
                 `;
                 // Asignar el ID de reserva al contenedor
