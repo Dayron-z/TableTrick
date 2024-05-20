@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     text: 'Has iniciado sesión correctamente'
                 }).then(() => {
                     // Redirigir a otra página o actualizar la interfaz
-                    // window.location.href = '/dashboard';
+                    window.location.href = "../../software_empresa/index.html";
                 });
             } else {
                 Swal.fire({
