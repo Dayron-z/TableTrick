@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     </figure>
                     <div class="d-flex justify-content-between">
                         <span>${item.cliente.email}</span>
-                        <span>${item.cliente.telefono}</span>
+                        <span>Phone: ${item.cliente.telefono}</span>
                     </div>
                 `;
                 // Asignar el ID de reserva al contenedor
